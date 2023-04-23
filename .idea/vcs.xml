@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Alzheimer_s Dataset" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Lenet-5_Alzhemier" vcs="Git" />
   </component>
 </project>
