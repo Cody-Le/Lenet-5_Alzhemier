@@ -22,12 +22,13 @@ def to_directory():
 
 
 if __name__ == "__main__":
-    batch_size = 32
+    batch_size = 10
     image_height, image_width = 176, 208
     df = tf.keras.utils.image_dataset_from_directory("./Alzheimer_s Dataset/train",
                                                      image_size=(image_width, image_height),
                                                      batch_size=batch_size,
-                                                     color_mode="grayscale"
+                                                     color_mode="grayscale",
+                                                     shuffle=True
                                                      )
     print(df)
     classNames = df.class_names
@@ -61,7 +62,7 @@ if __name__ == "__main__":
     model.add(tf.keras.layers.Dense(4, activation="relu"))
     model.add(tf.keras.layers.Softmax())
 
-    model.compile(optimizer="sgd", loss = "mse")
+    model.compile(optimizer="adam", loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics = [tf.keras.metrics.SparseCategoricalAccuracy()])
     model.summary()
 
 
@@ -72,8 +73,8 @@ if __name__ == "__main__":
                                                      verbose = 1
                                                      )
 
-    model.fit(df, epochs=10, callbacks=[cp_callback])
-
+    model.fit(df, epochs=2, callbacks=[cp_callback])
+    model.save("./savedModel/model")
 
 
 
